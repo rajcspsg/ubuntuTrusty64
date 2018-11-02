@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "remote" do |remote|
       remote.vm.box = "ubuntu/trusty64"
-      remote.vm.network "private_network", ip: "192.168.50.4"
+      remote.vm.network "private_network", ip: "192.168.34.10"
       remote.vm.provider "virtualbox" do |vb|
         vb.gui = false
         vb.memory = "1024"
@@ -27,7 +27,11 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "ansible" do |ansible|
       ansible.vm.box = "ubuntu/trusty64"
-      ansible.vm.network "private_network", ip: "192.168.50.5"
+      ansible.vm.network "private_network", ip: "192.168.34.11"
+      ansible.vm.provider "virtualbox" do |vb|
+        vb.gui = false
+        vb.memory = "1024"
+      end
       ansible.vm.provision :shell, :path => "ansible.sh"
     end
 
@@ -65,14 +69,6 @@ Vagrant.configure("2") do |config|
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
-  #
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-  # end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
